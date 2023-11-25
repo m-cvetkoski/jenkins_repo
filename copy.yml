@@ -1,0 +1,10 @@
+---
+- name: Yo man how do you do?
+  hosts: martin
+  become: true
+
+  tasks:
+    - name: Copy source files to worker node
+      copy:
+        src: /home/martin/Desktop/my_app
+        dest: /home/work_vm1/Desktop

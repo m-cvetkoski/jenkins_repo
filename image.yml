@@ -1,0 +1,27 @@
+---
+- name: Build Docker Image
+  hosts: martin
+  become: true
+
+  tasks:
+    - name: Build Docker image
+      docker_image:
+        build:
+          path: /home/work_vm1/Desktop/my_app
+        name: my_flask_app
+        source: build
+
+- name: Create Docker Container with Enviroment Variable
+  hosts: martin
+  become: true
+
+  tasks:
+    - name: Create Docker Container
+      docker_container:
+        name: my_new_container
+        image: my_flask_app
+        state: started
+        env:
+          MY_PORT: "8080"
+        published_ports:
+          - "8080:8080"
